@@ -4,6 +4,12 @@
     "outDir": "../out-tsc/app",
     "types": []
   },
+  "baseUrl": "",
+    "paths": {
+      "@angular/*": [
+        "../node_modules/@angular/*"
+      ]
+  },  
   "exclude": [
     "test.ts",
     "**/*.spec.ts"

@@ -1,0 +1,45 @@
+<div class="col-md-12">
+<h2 class="text-left">Employee List</h2>
+<div class="usercontact-list">  
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Employee Id</th>
+        <th>Employee Name</th>
+        <th>Project Name</th>
+        <th>Rating</th>
+        <th>Comments</th>
+        <th>Manager Rating</th>
+        <th>Manager Comments</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empl of allEmployees; let i = index">
+        <td>{{empl.id}}</td>
+        <td>{{empl.name}}</td>        
+        <td>{{empl.project}}</td>
+        <td>{{empl.rating | rating}}</td>
+        <td>{{empl.comments}}</td>
+        <td>
+            <app-rating [rating]="empl.managerRating"
+            [itemId]='empl.id' 
+            [isRatingDisable] = "!managerRoute"
+            (ratingClick)="ratingManagerRating($event, empl.id)">
+            </app-rating>
+        </td>        
+        <td>
+          <textarea (blur)="ratingManagerComments($event, empl.id)" [attr.disabled]="!managerRoute === true ? true : null" name="managerComments" class="form-control" rows="2">{{empl.managerComments}}</textarea>
+        </td>
+        <td>
+          <button class=" btn btn-primary " [disabled]="(empl.managerRating || empl.managerComments) && !managerRoute" (click)="editEmployee(empl, i)">Edit</button>
+        </td>
+        <td>
+          <button class="btn btn-danger ml-2 " [disabled]="(empl.managerRating || empl.managerComments) && !managerRoute" (click)="deleteEmployee(empl)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+</div>
