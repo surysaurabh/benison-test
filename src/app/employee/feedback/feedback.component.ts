@@ -10,6 +10,7 @@ import { filter, pairwise } from 'rxjs/operators';
 
 // import { Router, ActivatedRoute } from '@angular/router';
 import { Feedback } from 'src/app/share/feedback.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-feedback',
@@ -27,11 +28,37 @@ export class FeedbackComponent implements OnInit {
   @Output()
   createUsercontact = new EventEmitter<Feedback>();
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private empService: EmployeeService, private _location: Location) { 
+  userTestStatus: Array<{ id: number, name: string }> = [
+    { "id": 0, "name": "Available" },
+    { "id": 1, "name": "Ready" },
+    { "id": 2, "name": "Started" }
+  ];
+
+  constructor(private formBuilder: FormBuilder, 
+    private router: Router, 
+    private empService: EmployeeService, 
+    private _location: Location,
+    private http: HttpClient) { 
     
   }
 
   ngOnInit() {
+
+    var a = [1,2,3];var arr = [];
+    for(let i = 0; i<a.length; i++) {
+      for (let j=i; j<a.length; j++) {
+    //   console.log('top', a[i]);
+    // console.log('inner', a[j]);
+    const p = a.unshift(j)
+    arr.push(p);
+      }
+    }
+    console.log(arr);
+
+  this.http.get('https://jsonplaceholder.typicode.com/todos')
+  .subscribe(
+    (data) => { console.log(data) }
+  )
 
   this.selecteEmployee = this.empService.selectedEmployee;
 

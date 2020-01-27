@@ -1,7 +1,20 @@
-<div class="header" *ngIf = "!loginRoute">
+<div class="header">
+    <p>:After login, These buttons are dynamically show-hide using behaviourSubject and async pipe"</p>
     <div class="header-right">
-        <a routerLink="/" >Back To Login</a>
+            <a [hidden]="empService.isLoggedIn | async" >Login</a>
+            <a [hidden]="!(isLoggedIn$ | async)" (click)="logout()" href="javascript:void(0)">Logout</a>
+
     </div>
+    <!-- <ng-template *ngFor="item in employees | async">
+        {{item.id}}
+    </ng-template> -->
+    <table>
+        <tbody>
+        <tr *ngFor="let item of asyncEmployee | async">
+            <td>dd{{item.id}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 

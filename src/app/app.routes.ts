@@ -3,7 +3,6 @@ import { LoginComponent } from './login/login.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { FeedbackComponent } from './employee/feedback/feedback.component';
 import { ListComponent } from './employee/list/list.component';
-
 export const routes: Routes = [
 	{
 	    path: '',
